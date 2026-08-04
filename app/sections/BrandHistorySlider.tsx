@@ -11,7 +11,7 @@ const BrandHistorySlider = () => {
     const scroll = (direction: "left" | "right") => {
         if (sliderRef.current) {
             const container = sliderRef.current;
-            const scrollAmount = 380;
+            const scrollAmount = 740;
 
             if (direction === "right") {
                 const maxScrollLeft = container.scrollWidth - container.clientWidth;
@@ -36,7 +36,7 @@ const BrandHistorySlider = () => {
 
         const interval = setInterval(() => {
             scroll("right");
-        }, 3500);
+        }, 2500);
 
         return () => clearInterval(interval);
     }, [isPaused]);
