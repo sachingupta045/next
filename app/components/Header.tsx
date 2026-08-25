@@ -37,6 +37,11 @@ export const Header = () => {
     pathname.startsWith("/category/") ||
     pathname === "/compare";
 
+  // Hide storefront header inside the Admin Dashboard
+  if (pathname?.startsWith("/admin")) {
+    return null;
+  }
+
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${scrolled
@@ -83,6 +88,14 @@ export const Header = () => {
             >
               <span>🍷</span>
               <span>Explore</span>
+            </Link>
+            <Link
+              href="/admin"
+              className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-slate-900 dark:bg-slate-800 text-white font-bold text-xs border border-slate-700 hover:bg-slate-800 hover:border-red-500 transition-all shadow-sm"
+              title="Admin Dashboard"
+            >
+              <i className="fas fa-shield-alt text-red-500 text-xs" />
+              <span>Admin</span>
             </Link>
           </div>
 
