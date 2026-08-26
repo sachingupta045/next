@@ -40,25 +40,25 @@ export const FloatingCompareBar: React.FC = () => {
 
   return (
     <>
-      {/* ── Sarab/Drinkit Styled Bottom Compare Tray ─────────────────────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-50 bg-[#fff8f0]/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-amber-200/60 dark:border-slate-800 shadow-[0_-8px_30px_rgba(0,0,0,0.12)] animate-slide-up">
+      {/* ── Bottom Compare Tray ─────────────────────── */}
+      <div className="fixed bottom-0 left-0 right-0 z-50 bg-surface/95 backdrop-blur-md border-t border-white/5 shadow-[0_-8px_30px_rgba(0,0,0,0.3)] animate-slide-up">
         {/* Tray Top Header */}
-        <div className="max-w-[1320px] mx-auto px-4 py-2 border-b border-amber-100 dark:border-slate-800 flex items-center justify-between text-xs sm:text-sm">
-          <div className="text-slate-700 dark:text-slate-300 font-medium">
-            <span className="font-bold text-slate-900 dark:text-white">
+        <div className="max-w-[1320px] mx-auto px-4 py-2 border-b border-white/5 flex items-center justify-between text-xs sm:text-sm">
+          <div className="text-muted font-medium">
+            <span className="font-bold text-cream">
               {compareItems.length} {compareItems.length === 1 ? "product" : "products"}
             </span>{" "}
             in your{" "}
             <Link
               href="/compare"
-              className="text-[#e8281a] dark:text-red-400 font-bold hover:underline"
+              className="text-amber font-bold hover:underline focus-visible:ring-2 focus-visible:ring-amber rounded"
             >
               compare queue
             </Link>
           </div>
           <button
             onClick={() => setIsCompareTrayOpen(false)}
-            className="w-7 h-7 rounded-full bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 dark:hover:text-white transition-colors"
+            className="w-7 h-7 rounded-full bg-base border border-white/10 hover:bg-white/5 flex items-center justify-center text-muted hover:text-cream transition-colors focus-visible:ring-2 focus-visible:ring-amber"
             title="Minimize tray"
           >
             <X className="w-4 h-4" />
@@ -72,12 +72,12 @@ export const FloatingCompareBar: React.FC = () => {
             {compareItems.map((item) => (
               <div
                 key={item.id}
-                className="relative bg-white dark:bg-slate-800 border border-amber-100 dark:border-slate-700 rounded-2xl p-2.5 flex items-center gap-3 shadow-xs transition-all"
+                className="relative bg-base border border-white/5 rounded-2xl p-2.5 flex items-center gap-3 transition-all"
               >
                 {/* Remove item cross button */}
                 <button
                   onClick={() => toggleCompare(item)}
-                  className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-slate-100 dark:bg-slate-700 hover:bg-[#e8281a] hover:text-white text-slate-400 flex items-center justify-center transition-colors"
+                  className="absolute top-1.5 right-1.5 w-5 h-5 rounded-full bg-white/5 hover:bg-amber hover:text-base text-muted flex items-center justify-center transition-colors focus-visible:ring-2 focus-visible:ring-amber"
                   title="Remove product"
                 >
                   <X className="w-3 h-3" />
@@ -86,14 +86,14 @@ export const FloatingCompareBar: React.FC = () => {
                 <img
                   src={item.image}
                   alt={item.title}
-                  className="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-xl border border-slate-100 dark:border-slate-700 shrink-0"
+                  className="w-12 h-12 sm:w-14 sm:h-14 object-cover rounded-xl border border-white/5 shrink-0"
                 />
 
                 <div className="min-w-0 pr-4">
-                  <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate leading-snug">
+                  <h4 className="text-xs font-bold text-cream truncate leading-snug">
                     {item.title}
                   </h4>
-                  <div className="text-xs sm:text-sm font-black text-[#e8281a] dark:text-red-400 font-serif mt-1">
+                  <div className="text-xs sm:text-sm font-black text-amber font-serif mt-1">
                     ₹{item.price.toLocaleString()}
                   </div>
                 </div>
@@ -105,12 +105,12 @@ export const FloatingCompareBar: React.FC = () => {
               <button
                 key={index}
                 onClick={() => setIsSearchModalOpen(true)}
-                className="border-2 border-dashed border-amber-300/80 dark:border-amber-700/50 hover:border-[#e8281a] dark:hover:border-red-400 rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-slate-400 hover:text-[#e8281a] transition-all bg-white/60 dark:bg-slate-800/30 group h-[74px] sm:h-[82px]"
+                className="border-2 border-dashed border-amber/30 hover:border-amber rounded-2xl p-3 flex flex-col items-center justify-center gap-1.5 text-muted hover:text-amber transition-all bg-base/30 group h-[74px] sm:h-[82px] focus-visible:ring-2 focus-visible:ring-amber"
               >
-                <div className="w-8 h-8 rounded-full bg-[#f6a623] group-hover:bg-[#e8281a] text-white flex items-center justify-center group-hover:scale-110 transition-all shadow-md shadow-amber-500/20">
+                <div className="w-8 h-8 rounded-full bg-amber group-hover:bg-amber-glow text-base flex items-center justify-center group-hover:scale-110 transition-all shadow-md shadow-amber/20">
                   <Plus className="w-5 h-5 stroke-[3]" />
                 </div>
-                <span className="text-xs font-bold text-slate-700 dark:text-slate-300 group-hover:text-[#e8281a]">
+                <span className="text-xs font-bold text-cream group-hover:text-amber">
                   Add Product
                 </span>
               </button>
@@ -118,10 +118,10 @@ export const FloatingCompareBar: React.FC = () => {
           </div>
 
           {/* Action Buttons Row */}
-          <div className="flex items-center justify-center gap-4 pt-1.5 pb-1 border-t border-amber-100 dark:border-slate-800">
+          <div className="flex items-center justify-center gap-4 pt-1.5 pb-1 border-t border-white/5">
             <Link
               href="/compare"
-              className="px-7 py-2.5 bg-gradient-to-br from-[#e8281a] to-[#c01e12] hover:from-red-700 hover:to-red-800 text-white font-black text-xs sm:text-sm tracking-wider uppercase rounded-full shadow-md shadow-red-600/25 hover:shadow-lg hover:shadow-red-600/35 hover:-translate-y-0.5 transition-all"
+              className="px-7 py-2.5 bg-gradient-to-br from-amber to-amber-glow hover:from-amber-glow hover:to-amber text-base font-black text-xs sm:text-sm tracking-wider uppercase rounded-full shadow-[0_4px_16px_rgba(193,122,61,0.25)] hover:shadow-[0_8px_24px_rgba(193,122,61,0.35)] hover:-translate-y-0.5 transition-all focus-visible:ring-2 focus-visible:ring-amber-glow"
             >
               COMPARE NOW
             </Link>
@@ -129,7 +129,7 @@ export const FloatingCompareBar: React.FC = () => {
             {compareItems.length < 4 && (
               <button
                 onClick={() => setIsSearchModalOpen(true)}
-                className="px-4 py-2.5 text-[#e8281a] hover:text-red-700 dark:text-red-400 font-black text-xs sm:text-sm tracking-wider uppercase transition-colors"
+                className="px-4 py-2.5 text-amber hover:text-amber-glow font-black text-xs sm:text-sm tracking-wider uppercase transition-colors focus-visible:ring-2 focus-visible:ring-amber rounded"
               >
                 ADD PRODUCT
               </button>
@@ -138,26 +138,26 @@ export const FloatingCompareBar: React.FC = () => {
         </div>
       </div>
 
-      {/* ── Search & Add Drink Modal ─────────────────────────────────────── */}
+      {/* ── Search & Add Drink Modal ───────────────── */}
       {isSearchModalOpen && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-black/70 backdrop-blur-xs"
           onClick={() => setIsSearchModalOpen(false)}
         >
           <div
-            className="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 animate-scale-up"
+            className="bg-surface rounded-3xl max-w-lg w-full p-6 shadow-2xl border border-white/5 animate-scale-up"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
-                <Scale className="w-5 h-5 text-[#e8281a]" />
-                <h3 className="text-lg font-black text-slate-900 dark:text-white font-serif">
+                <Scale className="w-5 h-5 text-amber" />
+                <h3 className="text-lg font-black text-cream font-serif">
                   Add Beverage to Compare
                 </h3>
               </div>
               <button
                 onClick={() => setIsSearchModalOpen(false)}
-                className="w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center text-slate-400 hover:text-slate-700 dark:hover:text-white transition-colors"
+                className="w-8 h-8 rounded-full bg-base flex items-center justify-center text-muted hover:text-cream transition-colors focus-visible:ring-2 focus-visible:ring-amber"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -165,21 +165,21 @@ export const FloatingCompareBar: React.FC = () => {
 
             {/* Search Input */}
             <div className="relative mb-4">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-muted" />
               <input
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 placeholder="Search wine, beer, whisky, gin..."
                 autoFocus
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-full text-sm text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-[#e8281a] transition-colors"
+                className="w-full pl-10 pr-4 py-2.5 bg-base border border-white/10 rounded-full text-sm text-cream placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-amber focus:border-amber transition-colors"
               />
             </div>
 
             {/* Product List */}
             <div className="max-h-72 overflow-y-auto space-y-2 pr-1 custom-scrollbar">
               {availableProducts.length === 0 ? (
-                <div className="text-center py-8 text-slate-400 text-sm font-medium">
+                <div className="text-center py-8 text-muted text-sm font-medium">
                   No matching beverages found.
                 </div>
               ) : (
@@ -187,28 +187,28 @@ export const FloatingCompareBar: React.FC = () => {
                   <div
                     key={p.id}
                     onClick={() => handleAddProduct(p)}
-                    className="flex items-center justify-between p-3 rounded-2xl border border-slate-100 dark:border-slate-800 hover:border-[#e8281a] hover:bg-amber-50/30 dark:hover:bg-slate-800/80 cursor-pointer transition-all group"
+                    className="flex items-center justify-between p-3 rounded-2xl border border-white/5 hover:border-amber/30 hover:bg-white/[0.02] cursor-pointer transition-all group"
                   >
                     <div className="flex items-center gap-3 min-w-0">
                       <img
                         src={p.image}
                         alt={p.title}
-                        className="w-12 h-12 rounded-xl object-cover border border-slate-100 dark:border-slate-700 shrink-0"
+                        className="w-12 h-12 rounded-xl object-cover border border-white/5 shrink-0"
                       />
                       <div className="min-w-0">
-                        <span className="text-[10px] font-extrabold uppercase text-[#f6a623] tracking-wide block">
+                        <span className="text-[10px] font-extrabold uppercase text-amber-glow tracking-wide block">
                           {p.brand} · {p.category}
                         </span>
-                        <h4 className="text-xs font-bold text-slate-900 dark:text-white truncate">
+                        <h4 className="text-xs font-bold text-cream truncate">
                           {p.title}
                         </h4>
-                        <span className="text-xs font-black text-[#e8281a] dark:text-red-400 font-serif">
+                        <span className="text-xs font-black text-amber font-serif">
                           ₹{p.price.toLocaleString()}
                         </span>
                       </div>
                     </div>
 
-                    <button className="px-3.5 py-1.5 bg-[#e8281a] hover:bg-red-700 text-white rounded-full text-xs font-bold shrink-0 transition-transform group-hover:scale-105 shadow-sm">
+                    <button className="px-3.5 py-1.5 bg-amber hover:bg-amber-glow text-base rounded-full text-xs font-bold shrink-0 transition-transform group-hover:scale-105 shadow-sm focus-visible:ring-2 focus-visible:ring-amber-glow">
                       + Add
                     </button>
                   </div>

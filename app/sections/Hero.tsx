@@ -1,186 +1,189 @@
-import React from "react";
+"use client";
 
-const Hero = () => {
-    return (
-        <section id="hero" className="relative bg-[#fff8f0] dark:bg-slate-950 min-h-[92vh] flex items-center overflow-hidden py-12 lg:py-0">
-            {/* Background Decorative Circles */}
-            <div className="absolute -top-24 -right-20 w-[480px] h-[480px] rounded-full bg-[radial-gradient(circle,rgba(232,40,26,0.08),transparent_70%)] animate-pulse pointer-events-none" />
-            <div className="absolute -bottom-12 left-[8%] w-[280px] h-[280px] rounded-full bg-[radial-gradient(circle,rgba(246,166,35,0.1),transparent_70%)] animate-pulse pointer-events-none" />
+import React, { useState } from "react";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { Search, Flame, DollarSign, Scale, Utensils, Sparkles, ArrowRight } from "lucide-react";
 
-            {/* Large Background Watermark Text */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-[22vw] font-black font-serif text-black/[0.04] dark:text-white/[0.03] select-none pointer-events-none whitespace-nowrap">
-                FOOD
+export const Hero: React.FC = () => {
+  const router = useRouter();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const trendingTags = [
+    { label: "Indri Trini", slug: "drink-indri" },
+    { label: "Glenfiddich 12", slug: "drink-glenfiddich-12" },
+    { label: "Monkey Shoulder", slug: "drink-monkey-shoulder" },
+    { label: "Amrut Fusion", slug: "drink-amrut-fusion" },
+    { label: "Old Monk", slug: "drink-old-monk-legend" },
+    { label: "Corona Extra", slug: "drink-corona" },
+    { label: "Bombay Sapphire", slug: "drink-bombay-sapphire" },
+  ];
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchTerm.trim()) {
+      router.push(`/drinkit?search=${encodeURIComponent(searchTerm.trim())}`);
+    }
+  };
+
+  return (
+    <section className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 overflow-hidden bg-transparent">
+      <div className="max-w-[1320px] mx-auto px-4 sm:px-6 relative z-10">
+        {/* Main Center Banner */}
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-10">
+          {/* Sommelier Badge */}
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface/90 border border-sky-500/30 text-sky-300 text-xs font-bold mb-4 shadow-lg backdrop-blur-md">
+            <Sparkles className="w-3.5 h-3.5 text-sky-400" />
+            <span>India&apos;s Independent Liquor Price &amp; Taste Guide</span>
+          </div>
+
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-black font-serif tracking-tight text-cream leading-[1.15] mb-4">
+            Compare Prices. <br className="hidden sm:inline" />
+            <span className="bg-gradient-to-r from-sky-400 via-cyan-300 to-blue-400 text-transparent bg-clip-text">
+              Discover Fine Spirits.
+            </span>
+          </h1>
+
+          <p className="text-sm sm:text-base text-muted max-w-xl mx-auto leading-relaxed">
+            Search verified state prices, ABV strengths, tasting notes, and sommelier food pairings for over 500+ Indian &amp; international bottles.
+          </p>
+
+          {/* Central Search Form with Bombay Sapphire Focus */}
+          <form
+            onSubmit={handleSearchSubmit}
+            className="mt-6 max-w-2xl mx-auto relative flex items-center shadow-2xl"
+          >
+            <div className="relative w-full flex items-center bg-surface/95 backdrop-blur-xl border-2 border-white/10 focus-within:border-sky-400 focus-within:shadow-[0_0_24px_rgba(56,189,248,0.25)] rounded-2xl transition-all overflow-hidden p-1">
+              <Search className="w-5 h-5 text-muted ml-3 shrink-0" />
+              <input
+                type="text"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                placeholder="Search Single Malts, Gin, Craft Beers, Rum, Wine..."
+                className="w-full bg-transparent px-3 py-3 text-sm sm:text-base text-cream placeholder:text-muted outline-none"
+              />
+              <button
+                type="submit"
+                className="bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-400 hover:to-blue-500 text-white font-extrabold px-6 py-3 rounded-xl transition-all shadow-md active:scale-95 text-xs sm:text-sm shrink-0 flex items-center gap-1.5 focus-visible:ring-2 focus-visible:ring-sky-400"
+              >
+                <span>Search</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
             </div>
+          </form>
 
-            <div className="max-w-[1320px] mx-auto px-3 sm:px-4 relative z-10 w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center min-h-[88vh] py-8">
+          {/* Trending Search Chips */}
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2 flex-wrap mt-3.5 text-xs">
+            <span className="text-muted text-[11px] font-semibold mr-1">Trending:</span>
+            {trendingTags.map((tag) => (
+              <button
+                key={tag.slug}
+                onClick={() => router.push(`/drinkit?search=${encodeURIComponent(tag.label)}`)}
+                className="bg-surface/80 hover:bg-surface border border-white/10 hover:border-sky-400/40 text-cream px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors"
+              >
+                {tag.label}
+              </button>
+            ))}
+          </div>
+        </div>
 
-                    {/* Left Column - Content */}
-                    <div className="lg:col-span-6 flex flex-col items-start">
-                        {/* Top Badge */}
-                        <div className="inline-flex items-center gap-2 bg-white dark:bg-slate-900 rounded-full px-4 py-1.5 shadow-lg shadow-black/5 border border-slate-100 dark:border-slate-800 mb-6">
-                            <div className="w-7 h-7 rounded-full bg-gradient-to-br from-red-600 to-amber-500 flex items-center justify-center text-white text-xs shadow-sm">
-                                <i className="fas fa-star text-[10px]"></i>
-                            </div>
-                            <span className="text-xs font-semibold text-slate-800 dark:text-slate-200">
-                                #1 Rated Fast Food Restaurant in New York
-                            </span>
-                        </div>
-
-                        {/* Title */}
-                        <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] mb-5 tracking-tight">
-                            Delicious{" "}
-                            <span className="relative inline-block text-red-600 dark:text-red-500 after:content-[''] after:absolute after:bottom-1 after:left-0 after:right-0 after:h-2.5 after:bg-red-500/20 after:rounded-md after:-z-10">
-                                Fast Food
-                            </span>
-                            <br />
-                            for Every Moment
-                        </h1>
-
-                        {/* Description */}
-                        <p className="text-slate-600 dark:text-slate-300 text-base sm:text-lg leading-relaxed max-w-xl mb-8">
-                            Experience bold flavors crafted from premium ingredients. From crispy burgers to gourmet pizzas - every bite is an adventure worth savoring.
-                        </p>
-
-                        {/* CTA Buttons */}
-                        <div className="flex flex-wrap items-center gap-4 mb-2">
-                            <a
-                                href="#menu"
-                                className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-red-600 hover:bg-red-700 active:bg-red-800 text-white font-bold text-sm tracking-wide transition-all shadow-lg shadow-red-600/30 hover:shadow-xl hover:shadow-red-600/40 hover:-translate-y-0.5"
-                            >
-                                <i className="fas fa-utensils text-xs"></i>
-                                <span>Explore Menu</span>
-                            </a>
-
-                            {/* Video Trigger */}
-                            <a
-                                href="https://www.youtube.com/watch?v=RXv_uIN6e-Y"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="inline-flex items-center gap-3 px-3 py-1.5 rounded-full text-slate-900 dark:text-white font-semibold text-sm hover:text-red-600 dark:hover:text-red-500 transition-colors group"
-                            >
-                                <div className="w-12 h-12 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center shadow-lg shadow-black/10 text-red-600 dark:text-red-500 group-hover:bg-red-600 group-hover:text-white group-hover:scale-110 transition-all shrink-0">
-                                    <i className="fas fa-play text-xs ml-0.5"></i>
-                                </div>
-                                <span>Watch Our Story</span>
-                            </a>
-                        </div>
-
-                        {/* Hero Stats */}
-                        <div className="flex items-center gap-4 sm:gap-6 flex-wrap mt-8 pt-6 border-t border-slate-200/60 dark:border-slate-800/80">
-                            {/* Stat 1 */}
-                            <div className="flex flex-col">
-                                <span className="text-2xl sm:text-3xl font-black font-serif text-slate-900 dark:text-white leading-none">
-                                    850<em className="text-red-600 dark:text-red-500 not-italic">+</em>
-                                </span>
-                                <small className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">
-                                    Happy Customers
-                                </small>
-                            </div>
-
-                            <div className="w-px h-9 bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
-
-                            {/* Stat 2 */}
-                            <div className="flex flex-col">
-                                <span className="text-2xl sm:text-3xl font-black font-serif text-slate-900 dark:text-white leading-none">
-                                    120<em className="text-red-600 dark:text-red-500 not-italic">+</em>
-                                </span>
-                                <small className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">
-                                    Menu Items
-                                </small>
-                            </div>
-
-                            <div className="w-px h-9 bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
-
-                            {/* Stat 3 */}
-                            <div className="flex flex-col">
-                                <span className="text-2xl sm:text-3xl font-black font-serif text-slate-900 dark:text-white leading-none">
-                                    15<em className="text-red-600 dark:text-red-500 not-italic">+</em>
-                                </span>
-                                <small className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">
-                                    Expert Chefs
-                                </small>
-                            </div>
-
-                            <div className="w-px h-9 bg-slate-200 dark:bg-slate-800 hidden sm:block"></div>
-
-                            {/* Stat 4 */}
-                            <div className="flex flex-col">
-                                <span className="text-2xl sm:text-3xl font-black font-serif text-slate-900 dark:text-white leading-none">
-                                    12<em className="text-red-600 dark:text-red-500 not-italic">yr</em>
-                                </span>
-                                <small className="text-[11px] font-semibold text-slate-400 dark:text-slate-500 uppercase tracking-wider mt-1">
-                                    Experience
-                                </small>
-                            </div>
-                        </div>
-                    </div>
-
-                    {/* Right Column - Image & Floating Cards */}
-                    <div className="lg:col-span-6 relative flex justify-center">
-                        <div className="relative w-full max-w-[480px]">
-
-                            {/* Hero Main Circle */}
-                            <div className="w-72 h-72 sm:w-[400px] sm:h-[400px] lg:w-[460px] lg:h-[460px] rounded-full bg-gradient-to-br from-amber-50 to-orange-100 dark:from-slate-800 dark:to-slate-900 flex items-center justify-center mx-auto shadow-2xl shadow-red-500/10 p-3 sm:p-5 border-4 border-white dark:border-slate-800">
-                                <img
-                                    src="/img/banner-img.jpg"
-                                    alt="Burger"
-                                    className="w-full h-full object-cover rounded-full shadow-inner"
-                                />
-                            </div>
-
-                            {/* Floating Card 1: Hot Deal */}
-                            <div className="absolute top-6 -left-2 sm:-left-6 bg-white dark:bg-slate-900 rounded-2xl p-4 max-[400px]:p-[34px] shadow-xl shadow-black/10 border border-slate-100 dark:border-slate-800 flex items-center gap-3 animate-bounce [animation-duration:4s]">
-                                <div className="w-9 h-9 rounded-xl bg-red-500/15 text-red-600 flex items-center justify-center text-sm shrink-0">
-                                    <i className="fas fa-fire"></i>
-                                </div>
-                                <div>
-                                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block leading-tight">
-                                        Hot Deal
-                                    </span>
-                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
-                                        30% off today
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Floating Card 2: Rating */}
-                            <div className="absolute bottom-6 -right-2 sm:-right-4 bg-white dark:bg-slate-900 rounded-2xl p-4 max-[400px]:p-[34px] shadow-xl shadow-black/10 border border-slate-100 dark:border-slate-800 flex items-center gap-3 animate-bounce [animation-duration:4.5s]">
-                                <div className="w-9 h-9 rounded-xl bg-amber-500/15 text-amber-500 flex items-center justify-center text-sm shrink-0">
-                                    <i className="fas fa-star"></i>
-                                </div>
-                                <div>
-                                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block leading-tight">
-                                        4.9/5
-                                    </span>
-                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
-                                        2k+ reviews
-                                    </span>
-                                </div>
-                            </div>
-
-                            {/* Floating Card 3: Fast Delivery */}
-                            <div className="absolute top-1/2 -right-4 sm:-right-8 -translate-y-1/2 bg-white dark:bg-slate-900 rounded-2xl p-4 max-[400px]:p-[34px] shadow-xl shadow-black/10 border border-slate-100 dark:border-slate-800 flex items-center gap-3 animate-bounce [animation-duration:5s]">
-                                <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-600 flex items-center justify-center text-sm shrink-0">
-                                    <i className="fas fa-clock"></i>
-                                </div>
-                                <div>
-                                    <span className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white block leading-tight">
-                                        20 min
-                                    </span>
-                                    <span className="text-[10px] text-slate-500 dark:text-slate-400 block">
-                                        Fast delivery
-                                    </span>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-                </div>
+        {/* 4 Clean Action Cards with Distinctive Color Accents */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 max-w-4xl mx-auto">
+          {/* Card 1: The Pour Lineup (Flame Orange) */}
+          <a
+            href="#trending-lineup"
+            className="group p-4 rounded-2xl bg-surface/80 hover:bg-orange-950/20 border border-white/10 hover:border-orange-500/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_24px_rgba(249,115,22,0.18)] flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="w-9 h-9 rounded-xl bg-orange-500/15 text-orange-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Flame className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] uppercase font-black text-orange-300 bg-orange-500/15 px-2 py-0.5 rounded-md border border-orange-500/30">
+                Trending
+              </span>
             </div>
-        </section>
-    );
+            <div>
+              <h3 className="text-xs sm:text-sm font-bold text-cream group-hover:text-orange-300 transition-colors">
+                The Pour Lineup
+              </h3>
+              <p className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                India&apos;s most popular sips
+              </p>
+            </div>
+          </a>
+
+          {/* Card 2: Budget Explorer (Emerald Green) */}
+          <a
+            href="#budget-tiers"
+            className="group p-4 rounded-2xl bg-surface/80 hover:bg-emerald-950/20 border border-white/10 hover:border-emerald-500/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_24px_rgba(16,185,129,0.18)] flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="w-9 h-9 rounded-xl bg-emerald-500/15 text-emerald-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <DollarSign className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] uppercase font-black text-emerald-300 bg-emerald-500/15 px-2 py-0.5 rounded-md border border-emerald-500/30">
+                ₹ Price Tiers
+              </span>
+            </div>
+            <div>
+              <h3 className="text-xs sm:text-sm font-bold text-cream group-hover:text-emerald-300 transition-colors">
+                Budget Explorer
+              </h3>
+              <p className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                Under ₹1k, ₹2.5k &amp; Luxury
+              </p>
+            </div>
+          </a>
+
+          {/* Card 3: Compare Spirits (Ice Cyan) */}
+          <Link
+            href="/compare"
+            className="group p-4 rounded-2xl bg-surface/80 hover:bg-cyan-950/20 border border-white/10 hover:border-cyan-500/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_24px_rgba(6,182,212,0.18)] flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="w-9 h-9 rounded-xl bg-cyan-500/15 text-cyan-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Scale className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] uppercase font-black text-cyan-300 bg-cyan-500/15 px-2 py-0.5 rounded-md border border-cyan-500/30">
+                Side-by-Side
+              </span>
+            </div>
+            <div>
+              <h3 className="text-xs sm:text-sm font-bold text-cream group-hover:text-cyan-300 transition-colors">
+                Compare Spirits
+              </h3>
+              <p className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                ABV, flavor notes &amp; price
+              </p>
+            </div>
+          </Link>
+
+          {/* Card 4: Brand Stories (Rose Gold & Burgundy) */}
+          <a
+            href="#brand-spotlight"
+            className="group p-4 rounded-2xl bg-surface/80 hover:bg-rose-950/20 border border-white/10 hover:border-rose-500/50 backdrop-blur-md transition-all duration-300 hover:shadow-[0_0_24px_rgba(244,63,94,0.18)] flex flex-col justify-between"
+          >
+            <div className="flex items-center justify-between mb-3">
+              <div className="w-9 h-9 rounded-xl bg-rose-500/15 text-rose-400 flex items-center justify-center group-hover:scale-110 transition-transform">
+                <Utensils className="w-4 h-4" />
+              </div>
+              <span className="text-[10px] uppercase font-black text-rose-300 bg-rose-500/15 px-2 py-0.5 rounded-md border border-rose-500/30">
+                Distilleries
+              </span>
+            </div>
+            <div>
+              <h3 className="text-xs sm:text-sm font-bold text-cream group-hover:text-rose-300 transition-colors">
+                Brand Stories
+              </h3>
+              <p className="text-[11px] text-muted mt-0.5 line-clamp-1">
+                Heritage &amp; distilleries
+              </p>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
 };
 
 export default Hero;

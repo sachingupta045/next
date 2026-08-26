@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "./components/Header";
 import { CartProvider } from "./context/CartContext";
 import { WishlistCompareProvider } from "./context/WishlistCompareContext";
+import { AmbientBackground } from "./components/AmbientBackground";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
@@ -28,7 +30,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${inter.variable} ${geistMono.variable} h-full antialiased`}
     >
       <head>
         <link
@@ -36,11 +38,15 @@ export default function RootLayout({
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
         />
       </head>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col bg-base text-cream relative">
         <CartProvider>
           <WishlistCompareProvider>
-            <Header />
-            {children}
+            {/* Ambient Animated Luxury Background with Illustrations & Light Auroras */}
+            <AmbientBackground />
+            <div className="relative z-10 flex flex-col min-h-screen">
+              <Header />
+              <main className="flex-1">{children}</main>
+            </div>
           </WishlistCompareProvider>
         </CartProvider>
       </body>

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Star, ThumbsUp, CheckCircle, MessageSquare } from "lucide-react";
+import { Star, ThumbsUp, CheckCircle } from "lucide-react";
 import { DrinkReview } from "../../types/drinkit";
 
 interface DrinkReviewSectionProps {
@@ -16,32 +16,32 @@ export const DrinkReviewSection: React.FC<DrinkReviewSectionProps> = ({
   reviews,
 }) => {
   return (
-    <section className="bg-slate-900/60 border border-slate-800/80 rounded-3xl p-5 sm:p-8 my-8 backdrop-blur-md">
+    <section className="bg-surface/85 border border-white/10 rounded-3xl p-5 sm:p-8 my-8 backdrop-blur-md">
       {/* Section Header */}
-      <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight mb-6">
-        Customer Ratings & Reviews
+      <h3 className="text-xl sm:text-2xl font-black text-cream tracking-tight mb-6 font-serif">
+        Customer Ratings &amp; Reviews
       </h3>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 pb-8 border-b border-slate-800">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 pb-8 border-b border-white/10">
         {/* Rating Summary Box */}
-        <div className="flex flex-col items-center justify-center p-6 bg-slate-950 rounded-2xl border border-slate-800 text-center">
-          <span className="text-4xl sm:text-5xl font-black text-emerald-400 mb-1">
+        <div className="flex flex-col items-center justify-center p-6 bg-base/60 rounded-2xl border border-white/10 text-center">
+          <span className="text-4xl sm:text-5xl font-black text-amber mb-1 font-serif">
             {rating.toFixed(1)}
           </span>
-          <div className="flex items-center gap-1 text-amber-400 mb-2">
+          <div className="flex items-center gap-1 text-amber-glow mb-2">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
                 className={`w-4 h-4 ${
                   i < Math.floor(rating)
-                    ? "fill-amber-400 text-amber-400"
-                    : "text-slate-700"
+                    ? "fill-amber-glow text-amber-glow"
+                    : "text-white/10"
                 }`}
               />
             ))}
           </div>
-          <span className="text-xs font-semibold text-slate-400">
-            Based on {reviewCount} Sommelier & Customer Reviews
+          <span className="text-xs font-semibold text-muted">
+            Based on {reviewCount} Sommelier &amp; Customer Reviews
           </span>
         </div>
 
@@ -54,15 +54,15 @@ export const DrinkReviewSection: React.FC<DrinkReviewSectionProps> = ({
             { stars: 2, pct: 1 },
             { stars: 1, pct: 1 },
           ].map(({ stars, pct }) => (
-            <div key={stars} className="flex items-center gap-3 text-xs font-bold text-slate-300">
-              <span className="w-12">{stars} Stars</span>
-              <div className="flex-1 h-2.5 bg-slate-950 rounded-full overflow-hidden border border-slate-800">
+            <div key={stars} className="flex items-center gap-3 text-xs font-bold text-cream">
+              <span className="w-12 text-muted">{stars} Stars</span>
+              <div className="flex-1 h-2.5 bg-base rounded-full overflow-hidden border border-white/10">
                 <div
-                  className="h-full bg-emerald-500 rounded-full"
+                  className="h-full bg-gradient-to-r from-amber to-amber-glow rounded-full"
                   style={{ width: `${pct}%` }}
                 />
               </div>
-              <span className="w-8 text-right text-slate-400 font-normal">
+              <span className="w-8 text-right text-muted font-normal">
                 {pct}%
               </span>
             </div>
@@ -73,50 +73,50 @@ export const DrinkReviewSection: React.FC<DrinkReviewSectionProps> = ({
       {/* Reviews List */}
       <div className="space-y-4">
         {reviews.length === 0 ? (
-          <div className="text-center py-6 text-slate-400 text-xs font-medium">
+          <div className="text-center py-6 text-muted text-xs font-medium">
             Be the first sommelier to leave a review for this beverage!
           </div>
         ) : (
           reviews.map((rev) => (
             <div
               key={rev.id}
-              className="p-4 bg-slate-950 rounded-2xl border border-slate-800/80 space-y-2"
+              className="p-4 bg-base/60 rounded-2xl border border-white/10 space-y-2"
             >
               <div className="flex items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 rounded-full bg-emerald-950 text-emerald-400 border border-emerald-800 flex items-center justify-center text-xs font-bold">
+                  <div className="w-8 h-8 rounded-full bg-amber/15 text-amber border border-amber/30 flex items-center justify-center text-xs font-bold">
                     {rev.userName.charAt(0)}
                   </div>
                   <div>
-                    <h5 className="text-xs font-bold text-white flex items-center gap-1.5">
+                    <h5 className="text-xs font-bold text-cream flex items-center gap-1.5">
                       <span>{rev.userName}</span>
                       {rev.verifiedPurchase && (
-                        <span className="text-[10px] text-emerald-400 bg-emerald-950/60 px-1.5 py-0.2 rounded flex items-center gap-0.5 border border-emerald-900/40">
+                        <span className="text-[10px] text-sage bg-sage/10 px-1.5 py-0.2 rounded flex items-center gap-0.5 border border-sage/20">
                           <CheckCircle className="w-2.5 h-2.5" /> Verified
                         </span>
                       )}
                     </h5>
-                    <span className="text-[10px] text-slate-500 font-medium">
+                    <span className="text-[10px] text-muted font-medium">
                       {rev.date}
                     </span>
                   </div>
                 </div>
 
-                <div className="flex items-center gap-0.5 text-amber-400 bg-amber-950/40 px-2 py-1 rounded-lg text-xs font-bold">
+                <div className="flex items-center gap-0.5 text-amber-glow bg-amber/10 px-2 py-1 rounded-lg text-xs font-bold border border-amber/20">
                   <span>{rev.rating}</span>
-                  <Star className="w-3 h-3 fill-amber-400" />
+                  <Star className="w-3 h-3 fill-amber-glow" />
                 </div>
               </div>
 
-              <h6 className="text-xs font-extrabold text-slate-200">
+              <h6 className="text-xs font-extrabold text-cream">
                 {rev.title}
               </h6>
-              <p className="text-xs text-slate-300 leading-relaxed font-normal">
+              <p className="text-xs text-muted leading-relaxed font-normal">
                 {rev.comment}
               </p>
 
-              <div className="pt-2 flex items-center gap-4 text-[11px] text-slate-400">
-                <button className="flex items-center gap-1 hover:text-emerald-400 transition-colors">
+              <div className="pt-2 flex items-center gap-4 text-[11px] text-muted">
+                <button className="flex items-center gap-1 hover:text-amber transition-colors focus-visible:ring-2 focus-visible:ring-amber rounded">
                   <ThumbsUp className="w-3 h-3" />
                   <span>Helpful ({rev.likes})</span>
                 </button>

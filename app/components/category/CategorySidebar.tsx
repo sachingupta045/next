@@ -14,9 +14,9 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
   activeCategorySlug,
 }) => {
   return (
-    <aside className="w-full md:w-56 lg:w-64 shrink-0 bg-white dark:bg-slate-900 md:border-r border-slate-200 dark:border-slate-800 md:sticky md:top-[61px] md:h-[calc(100vh-61px)] overflow-y-auto custom-scrollbar transition-colors">
+    <aside className="w-full md:w-56 lg:w-64 shrink-0 bg-surface/85 backdrop-blur-md md:border-r border-white/5 md:sticky md:top-[61px] md:h-[calc(100vh-61px)] overflow-y-auto custom-scrollbar transition-colors">
       <div className="p-3">
-        <h3 className="text-xs font-black uppercase tracking-wider text-slate-400 dark:text-slate-500 mb-3 px-3 hidden md:block">
+        <h3 className="text-xs font-black uppercase tracking-wider text-muted mb-3 px-3 hidden md:block">
           Categories
         </h3>
 
@@ -28,10 +28,10 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
               <Link
                 key={cat.id}
                 href={`/category/${cat.slug}`}
-                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all shrink-0 md:shrink border text-left ${
+                className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all shrink-0 md:shrink border text-left focus-visible:ring-2 focus-visible:ring-amber ${
                   isActive
-                    ? "bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 font-bold border-emerald-500/30 shadow-sm"
-                    : "border-transparent text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/60 font-medium"
+                    ? "bg-amber/15 text-amber font-bold border-amber/30 shadow-sm"
+                    : "border-transparent text-cream hover:bg-white/5 font-medium"
                 }`}
               >
                 <div
@@ -49,12 +49,12 @@ export const CategorySidebar: React.FC<CategorySidebarProps> = ({
                   <p className="text-xs sm:text-sm truncate leading-tight">
                     {cat.name}
                   </p>
-                  <p className="text-[10px] text-slate-400 font-normal">
+                  <p className="text-[10px] text-muted font-normal">
                     {cat.itemCount} items
                   </p>
                 </div>
                 {isActive && (
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 hidden md:block shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber hidden md:block shrink-0" />
                 )}
               </Link>
             );

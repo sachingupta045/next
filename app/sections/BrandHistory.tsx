@@ -1,6 +1,9 @@
 "use client";
 
 import React from "react";
+import { AnimatedSection } from "../components/motion/AnimatedSection";
+import { StaggerContainer } from "../components/motion/StaggerContainer";
+import { StaggerItem } from "../components/motion/StaggerItem";
 
 interface Chef {
   id: number;
@@ -19,7 +22,7 @@ const chefsData: Chef[] = [
   {
     id: 1,
     name: "Alice Mortal",
-    role: "Head Chef",
+    role: "Master Sommelier",
     experience: "12 years experience",
     image: "/img/chefs/1.jpg",
     socials: {
@@ -31,7 +34,7 @@ const chefsData: Chef[] = [
   {
     id: 2,
     name: "Michael Corn",
-    role: "Grill Master",
+    role: "Distillery Craftsman",
     experience: "8 years experience",
     image: "/img/chefs/2.jpg",
     socials: {
@@ -43,7 +46,7 @@ const chefsData: Chef[] = [
   {
     id: 3,
     name: "Faz Chowdel",
-    role: "Pastry Chef",
+    role: "Pairing Specialist",
     experience: "10 years experience",
     image: "/img/chefs/3.jpg",
     socials: {
@@ -55,7 +58,7 @@ const chefsData: Chef[] = [
   {
     id: 4,
     name: "William Latnum",
-    role: "Pizza Artisan",
+    role: "Executive Cellarer",
     experience: "9 years experience",
     image: "/img/chefs/4.jpg",
     socials: {
@@ -68,55 +71,54 @@ const chefsData: Chef[] = [
 
 export const BrandHistory: React.FC = () => {
   return (
-    <section id="chefs" className="py-20 lg:py-24 bg-white dark:bg-slate-950 transition-colors">
-      <div className="max-w-[1320px] mx-auto px-4">
+    <section id="chefs" className="py-20 lg:py-24 bg-transparent relative transition-colors">
+      {/* Decorative Divider */}
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-3/4 h-px bg-gradient-to-r from-transparent via-amber/20 to-transparent" />
+
+      <div className="max-w-[1320px] mx-auto px-4 relative z-10">
         {/* Section Header */}
-        <div className="text-center mb-12 lg:mb-14" data-aos="fade-up">
-          <span className="block font-['Dancing_Script',cursive] text-2xl font-bold text-[#e8281a] dark:text-red-500 mb-1">
-            The Culinary Team
+        <AnimatedSection className="text-center mb-12 lg:mb-14">
+          <span className="block text-xs uppercase font-bold tracking-widest text-amber mb-2 font-sans">
+            Our Artisans &amp; Sommeliers
           </span>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-[#1a1a1a] dark:text-white leading-tight mb-3 font-serif">
-            Meet Our Expert <span className="text-[#e8281a] dark:text-red-500">Chefs</span>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-black text-cream leading-tight mb-3 font-serif">
+            Curated by <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber to-amber-glow">Master Craftsmen</span>
           </h2>
-          <div className="w-[58px] h-1 rounded-full bg-gradient-to-r from-[#e8281a] to-[#f6a623] mx-auto" />
-        </div>
+          <div className="w-[58px] h-1 rounded-full bg-gradient-to-r from-amber to-amber-glow mx-auto" />
+        </AnimatedSection>
 
         {/* Chef Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-          {chefsData.map((chef, index) => (
-            <div
-              key={chef.id}
-              data-aos="fade-up"
-              data-aos-delay={index * 80}
-            >
-              <div className="chcard group bg-white dark:bg-slate-900 rounded-[18px] overflow-hidden border border-slate-100 dark:border-slate-800 shadow-[0_4px_18px_rgba(0,0,0,0.07)] dark:shadow-none hover:-translate-y-[9px] hover:shadow-[0_12px_30px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_12px_30px_rgba(0,0,0,0.5)] transition-all duration-400">
+        <StaggerContainer className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
+          {chefsData.map((chef) => (
+            <StaggerItem key={chef.id}>
+              <div className="chcard group bg-surface/85 backdrop-blur-md rounded-2xl overflow-hidden border border-white/10 hover:-translate-y-2 hover:border-amber/40 hover:shadow-[0_0_30px_rgba(193,122,61,0.2)] transition-all duration-400">
                 {/* Chef Image & Social Container */}
-                <div className="chimg relative overflow-hidden h-[268px] bg-[#fdf5ed] dark:bg-slate-800">
+                <div className="chimg relative overflow-hidden h-[268px] bg-base/80">
                   <img
                     src={chef.image}
                     alt={chef.name}
                     className="w-full h-full object-cover object-top transition-transform duration-500 group-hover:scale-105"
                   />
                   {/* Social Overlay Bar */}
-                  <div className="chsoc absolute -bottom-14 group-hover:bottom-0 left-0 right-0 flex justify-center gap-2 py-3 px-3 bg-gradient-to-t from-black/70 to-transparent transition-all duration-400">
+                  <div className="chsoc absolute -bottom-14 group-hover:bottom-0 left-0 right-0 flex justify-center gap-2 py-3 px-3 bg-gradient-to-t from-black/80 via-black/50 to-transparent transition-all duration-400">
                     <a
                       href={chef.socials.instagram}
                       aria-label={`${chef.name}'s Instagram`}
-                      className="w-[33px] h-[33px] rounded-full bg-white/20 hover:bg-[#e8281a] dark:hover:bg-red-600 backdrop-blur-sm flex items-center justify-center text-white text-xs transition-colors duration-300"
+                      className="w-9 h-9 rounded-full bg-white/15 hover:bg-amber hover:text-base backdrop-blur-md flex items-center justify-center text-white text-xs transition-all duration-300 focus-visible:ring-2 focus-visible:ring-amber shadow-sm"
                     >
                       <i className="fab fa-instagram"></i>
                     </a>
                     <a
                       href={chef.socials.facebook}
                       aria-label={`${chef.name}'s Facebook`}
-                      className="w-[33px] h-[33px] rounded-full bg-white/20 hover:bg-[#e8281a] dark:hover:bg-red-600 backdrop-blur-sm flex items-center justify-center text-white text-xs transition-colors duration-300"
+                      className="w-9 h-9 rounded-full bg-white/15 hover:bg-amber hover:text-base backdrop-blur-md flex items-center justify-center text-white text-xs transition-all duration-300 focus-visible:ring-2 focus-visible:ring-amber shadow-sm"
                     >
                       <i className="fab fa-facebook-f"></i>
                     </a>
                     <a
                       href={chef.socials.twitter}
                       aria-label={`${chef.name}'s Twitter`}
-                      className="w-[33px] h-[33px] rounded-full bg-white/20 hover:bg-[#e8281a] dark:hover:bg-red-600 backdrop-blur-sm flex items-center justify-center text-white text-xs transition-colors duration-300"
+                      className="w-9 h-9 rounded-full bg-white/15 hover:bg-amber hover:text-base backdrop-blur-md flex items-center justify-center text-white text-xs transition-all duration-300 focus-visible:ring-2 focus-visible:ring-amber shadow-sm"
                     >
                       <i className="fab fa-twitter"></i>
                     </a>
@@ -124,21 +126,21 @@ export const BrandHistory: React.FC = () => {
                 </div>
 
                 {/* Chef Info */}
-                <div className="chbody p-[18px] text-center">
-                  <h3 className="chnm text-[1.05rem] font-bold text-[#1a1a1a] dark:text-white mb-0.5">
+                <div className="chbody p-5 text-center">
+                  <h3 className="chnm text-[1.1rem] font-bold text-cream mb-0.5 font-serif group-hover:text-amber transition-colors">
                     {chef.name}
                   </h3>
-                  <div className="chrole text-[0.78rem] text-[#e8281a] dark:text-red-500 font-semibold uppercase tracking-[0.8px]">
+                  <div className="chrole text-[0.8rem] text-amber-glow font-bold uppercase tracking-wider">
                     {chef.role}
                   </div>
-                  <div className="chexp text-[0.76rem] text-slate-500 dark:text-slate-400 font-normal mt-1">
+                  <div className="chexp text-[0.76rem] text-muted font-medium mt-1">
                     {chef.experience}
                   </div>
                 </div>
               </div>
-            </div>
+            </StaggerItem>
           ))}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

@@ -62,10 +62,10 @@ export const HeaderSearchBar: React.FC = () => {
           }}
           onFocus={() => setIsOpen(true)}
           placeholder="Search drinks, single malts, brands, wines..."
-          className="w-full h-10 pl-10 pr-9 text-xs sm:text-sm bg-slate-100 dark:bg-slate-800/90 border border-slate-200 dark:border-slate-700/80 rounded-full text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#e8281a]/40 focus:border-[#e8281a] transition-all shadow-inner"
+          className="w-full h-10 pl-10 pr-9 text-xs sm:text-sm bg-base border border-white/10 rounded-full text-cream placeholder-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 focus:border-sky-400 transition-all"
         />
-        <div className="absolute left-3.5 text-slate-400 pointer-events-none">
-          <i className="fas fa-search text-xs" />
+        <div className="absolute left-3.5 text-muted pointer-events-none">
+          <i className="fas fa-search text-xs text-sky-400/80" />
         </div>
 
         {query && (
@@ -74,7 +74,7 @@ export const HeaderSearchBar: React.FC = () => {
               setQuery("");
               setIsOpen(false);
             }}
-            className="absolute right-3 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 text-xs w-5 h-5 rounded-full flex items-center justify-center"
+            className="absolute right-3 text-muted hover:text-cream text-xs w-5 h-5 rounded-full flex items-center justify-center focus-visible:ring-2 focus-visible:ring-sky-400"
           >
             <i className="fas fa-times" />
           </button>
@@ -83,19 +83,19 @@ export const HeaderSearchBar: React.FC = () => {
 
       {/* Dropdown Results */}
       {isOpen && query.trim() !== "" && (
-        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-2xl overflow-hidden max-h-[420px] overflow-y-auto z-50 divide-y divide-slate-100 dark:divide-slate-800">
+        <div className="absolute top-full left-0 right-0 mt-2 bg-surface rounded-2xl border border-white/10 shadow-2xl overflow-hidden max-h-[420px] overflow-y-auto z-50 divide-y divide-white/5">
           {!hasResults ? (
-            <div className="p-6 text-center text-xs text-slate-500 dark:text-slate-400">
+            <div className="p-6 text-center text-xs text-muted">
               <p className="text-xl mb-1">🍷</p>
-              No matching drinks or brands found for "{query}"
+              No matching drinks or brands found for &quot;{query}&quot;
             </div>
           ) : (
             <>
               {/* Product Results */}
               {searchResults.products.length > 0 && (
                 <div className="p-3">
-                  <span className="text-[10px] font-black text-[#e8281a] uppercase tracking-wider block px-2 mb-2">
-                    Drinks & Spirits ({searchResults.products.length})
+                  <span className="text-[10px] font-black text-sky-400 uppercase tracking-wider block px-2 mb-2">
+                    Drinks &amp; Spirits ({searchResults.products.length})
                   </span>
                   <div className="space-y-1">
                     {searchResults.products.map(p => (
@@ -103,14 +103,14 @@ export const HeaderSearchBar: React.FC = () => {
                         key={p.id}
                         href={`/drink/${p.id}`}
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-amber-50 dark:hover:bg-slate-800/80 transition-colors group"
+                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-sky-950/30 transition-colors group focus-visible:ring-2 focus-visible:ring-sky-400"
                       >
                         <img src={p.image} alt={p.title} className="w-10 h-10 object-cover rounded-lg shrink-0" />
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-[#e8281a] transition-colors">{p.title}</p>
-                          <p className="text-[10px] text-slate-400">{p.brand} · {p.abv} ABV</p>
+                          <p className="text-xs font-bold text-cream line-clamp-1 group-hover:text-sky-300 transition-colors">{p.title}</p>
+                          <p className="text-[10px] text-muted">{p.brand} · {p.abv} ABV</p>
                         </div>
-                        <span className="text-xs font-black text-[#e8281a] font-serif shrink-0">₹{p.price.toLocaleString()}</span>
+                        <span className="text-xs font-black text-sky-400 font-serif shrink-0">₹{p.price.toLocaleString()}</span>
                       </Link>
                     ))}
                   </div>
@@ -120,7 +120,7 @@ export const HeaderSearchBar: React.FC = () => {
               {/* Brand Results */}
               {searchResults.brands.length > 0 && (
                 <div className="p-3">
-                  <span className="text-[10px] font-black text-amber-500 uppercase tracking-wider block px-2 mb-2">
+                  <span className="text-[10px] font-black text-sky-300 uppercase tracking-wider block px-2 mb-2">
                     Brand Heritage ({searchResults.brands.length})
                   </span>
                   <div className="space-y-1">
@@ -129,14 +129,14 @@ export const HeaderSearchBar: React.FC = () => {
                         key={b.id}
                         href={`/brand/${encodeURIComponent(b.name)}`}
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-amber-50 dark:hover:bg-slate-800/80 transition-colors group"
+                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-sky-950/30 transition-colors group focus-visible:ring-2 focus-visible:ring-sky-400"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400 font-black text-xs flex items-center justify-center font-serif shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-sky-500/10 text-sky-400 font-black text-xs flex items-center justify-center font-serif shrink-0">
                           {b.initials}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-amber-500 transition-colors">{b.name}</p>
-                          <p className="text-[10px] text-slate-400">Est. {b.foundingYear} · {b.origin}</p>
+                          <p className="text-xs font-bold text-cream line-clamp-1 group-hover:text-sky-300 transition-colors">{b.name}</p>
+                          <p className="text-[10px] text-muted">Est. {b.foundingYear} · {b.origin}</p>
                         </div>
                       </Link>
                     ))}
@@ -147,7 +147,7 @@ export const HeaderSearchBar: React.FC = () => {
               {/* Category Spotlight Results */}
               {searchResults.categories.length > 0 && (
                 <div className="p-3">
-                  <span className="text-[10px] font-black text-emerald-500 uppercase tracking-wider block px-2 mb-2">
+                  <span className="text-[10px] font-black text-teal-400 uppercase tracking-wider block px-2 mb-2">
                     Category Spotlights ({searchResults.categories.length})
                   </span>
                   <div className="space-y-1">
@@ -156,14 +156,14 @@ export const HeaderSearchBar: React.FC = () => {
                         key={c.slug}
                         href={`/category/${c.slug}`}
                         onClick={() => setIsOpen(false)}
-                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-emerald-50 dark:hover:bg-slate-800/80 transition-colors group"
+                        className="flex items-center gap-3 p-2 rounded-xl hover:bg-sky-950/30 transition-colors group focus-visible:ring-2 focus-visible:ring-sky-400"
                       >
-                        <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-black text-xs flex items-center justify-center font-serif shrink-0">
+                        <div className="w-8 h-8 rounded-lg bg-teal-500/10 text-teal-400 font-black text-xs flex items-center justify-center font-serif shrink-0">
                           🍷
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-xs font-bold text-slate-900 dark:text-white line-clamp-1 group-hover:text-emerald-500 transition-colors">{c.name}</p>
-                          <p className="text-[10px] text-slate-400">{c.subtitle}</p>
+                          <p className="text-xs font-bold text-cream line-clamp-1 group-hover:text-teal-300 transition-colors">{c.name}</p>
+                          <p className="text-[10px] text-muted">{c.subtitle}</p>
                         </div>
                       </Link>
                     ))}
@@ -177,3 +177,5 @@ export const HeaderSearchBar: React.FC = () => {
     </div>
   );
 };
+
+export default HeaderSearchBar;

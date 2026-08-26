@@ -26,20 +26,20 @@ export const FilterModal: React.FC<FilterModalProps> = ({
       {/* Overlay */}
       <div
         onClick={onClose}
-        className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity"
+        className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity"
       />
 
       {/* Slide-in Panel */}
-      <div className="relative w-full max-w-sm bg-white dark:bg-slate-900 text-slate-900 dark:text-white h-full flex flex-col shadow-2xl z-10 animate-slide-left">
+      <div className="relative w-full max-w-sm bg-surface text-cream h-full flex flex-col shadow-2xl z-10 animate-slide-left border-l border-white/10">
         {/* Header */}
-        <div className="p-4 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between">
+        <div className="p-4 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-2 font-extrabold text-base">
-            <SlidersHorizontal className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
+            <SlidersHorizontal className="w-5 h-5 text-amber" />
             <span>Filter Products</span>
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-500"
+            className="p-1 rounded-full hover:bg-white/5 text-muted hover:text-cream transition-colors focus-visible:ring-2 focus-visible:ring-amber"
           >
             <X className="w-5 h-5" />
           </button>
@@ -49,7 +49,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
         <div className="flex-1 overflow-y-auto p-4 space-y-6">
           {/* Diet Preference */}
           <div>
-            <h4 className="text-xs font-black uppercase text-slate-400 mb-3 tracking-wider">
+            <h4 className="text-xs font-black uppercase text-muted mb-3 tracking-wider">
               Diet Preference
             </h4>
             <div className="flex gap-3">
@@ -57,24 +57,24 @@ export const FilterModal: React.FC<FilterModalProps> = ({
                 onClick={() =>
                   onApplyFilters({ isVegOnly: !filters.isVegOnly })
                 }
-                className={`flex-1 p-3 rounded-xl border-2 text-xs font-bold flex items-center justify-center gap-2 transition-all ${
+                className={`flex-1 p-3 rounded-xl border-2 text-xs font-bold flex items-center justify-center gap-2 transition-all focus-visible:ring-2 focus-visible:ring-amber ${
                   filters.isVegOnly
-                    ? "border-emerald-600 bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300"
-                    : "border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300"
+                    ? "border-amber bg-amber/15 text-amber"
+                    : "border-white/10 text-cream hover:border-amber/40"
                 }`}
               >
-                <span className="w-3 h-3 rounded-xs border-2 border-emerald-600 flex items-center justify-center p-0.5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-600" />
+                <span className="w-3 h-3 rounded-xs border-2 border-sage flex items-center justify-center p-0.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-sage" />
                 </span>
                 <span>Veg Only</span>
-                {filters.isVegOnly && <Check className="w-4 h-4 text-emerald-600" />}
+                {filters.isVegOnly && <Check className="w-4 h-4 text-amber" />}
               </button>
             </div>
           </div>
 
           {/* Price Range */}
           <div>
-            <h4 className="text-xs font-black uppercase text-slate-400 mb-3 tracking-wider">
+            <h4 className="text-xs font-black uppercase text-muted mb-3 tracking-wider">
               Max Price: ₹{filters.maxPrice}
             </h4>
             <input
@@ -86,9 +86,9 @@ export const FilterModal: React.FC<FilterModalProps> = ({
               onChange={(e) =>
                 onApplyFilters({ maxPrice: Number(e.target.value) })
               }
-              className="w-full accent-emerald-600 cursor-pointer"
+              className="w-full accent-amber cursor-pointer"
             />
-            <div className="flex justify-between text-xs font-semibold text-slate-400 mt-1">
+            <div className="flex justify-between text-xs font-semibold text-muted mt-1">
               <span>₹20</span>
               <span>₹500+</span>
             </div>
@@ -96,7 +96,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
 
           {/* Rating */}
           <div>
-            <h4 className="text-xs font-black uppercase text-slate-400 mb-3 tracking-wider">
+            <h4 className="text-xs font-black uppercase text-muted mb-3 tracking-wider">
               Minimum Rating
             </h4>
             <div className="flex flex-wrap gap-2">
@@ -104,10 +104,10 @@ export const FilterModal: React.FC<FilterModalProps> = ({
                 <button
                   key={ratingVal}
                   onClick={() => onApplyFilters({ minRating: ratingVal })}
-                  className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1 ${
+                  className={`px-3 py-2 rounded-xl text-xs font-bold border transition-all flex items-center gap-1 focus-visible:ring-2 focus-visible:ring-amber ${
                     filters.minRating === ratingVal
-                      ? "border-emerald-600 bg-emerald-600 text-white"
-                      : "border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 hover:border-emerald-500"
+                      ? "border-amber bg-amber text-base"
+                      : "border-white/10 text-cream hover:border-amber"
                   }`}
                 >
                   {ratingVal === 0 ? (
@@ -115,7 +115,7 @@ export const FilterModal: React.FC<FilterModalProps> = ({
                   ) : (
                     <>
                       <span>{ratingVal}+</span>
-                      <Star className="w-3 h-3 fill-current" />
+                      <Star className="w-3 h-3 fill-current text-amber-glow" />
                     </>
                   )}
                 </button>
@@ -125,19 +125,19 @@ export const FilterModal: React.FC<FilterModalProps> = ({
         </div>
 
         {/* Footer */}
-        <div className="p-4 border-t border-slate-200 dark:border-slate-800 flex gap-3">
+        <div className="p-4 border-t border-white/10 flex gap-3">
           <button
             onClick={() => {
               onResetFilters();
               onClose();
             }}
-            className="flex-1 py-2.5 rounded-xl border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold text-xs hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            className="flex-1 py-2.5 rounded-xl border border-white/15 text-cream font-bold text-xs hover:bg-white/5 transition-colors focus-visible:ring-2 focus-visible:ring-amber"
           >
             Reset
           </button>
           <button
             onClick={onClose}
-            className="flex-1 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs transition-colors shadow-md"
+            className="flex-1 py-2.5 rounded-xl bg-gradient-to-r from-amber to-amber-glow text-base font-bold text-xs transition-colors shadow-md focus-visible:ring-2 focus-visible:ring-amber-glow"
           >
             Apply Filters
           </button>
