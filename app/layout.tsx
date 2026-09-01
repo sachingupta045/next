@@ -5,6 +5,7 @@ import { Header } from "./components/Header";
 import { CartProvider } from "./context/CartContext";
 import { WishlistCompareProvider } from "./context/WishlistCompareContext";
 import { AmbientBackground } from "./components/AmbientBackground";
+import { ScrollProgressBar } from "./components/motion/ScrollProgressBar";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -39,6 +40,7 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-full flex flex-col bg-base text-cream relative">
+        <ScrollProgressBar />
         <CartProvider>
           <WishlistCompareProvider>
             {/* Ambient Animated Luxury Background with Illustrations & Light Auroras */}

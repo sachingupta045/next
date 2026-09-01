@@ -8,7 +8,7 @@ import { FloatingCompareBar } from "../components/drinkit/FloatingCompareBar";
 import { CompareModal } from "../components/drinkit/CompareModal";
 import { WishlistDrawer } from "../components/drinkit/WishlistDrawer";
 import {
-  Heart, Scale, Star, ArrowRight, Search, X, Check,
+  Heart, Scale, Star, ArrowRight, Check,
   ChevronDown, RotateCcw, Filter, SlidersHorizontal
 } from "lucide-react";
 import { DrinkProduct } from "../types/drinkit";
@@ -234,88 +234,6 @@ function DrinkitContent() {
   return (
     <div className="min-h-screen bg-base transition-colors">
 
-      {/* ─── Page Header ──────────────────────────────────────────────────── */}
-      <div className="bg-surface border-b border-white/5">
-        <div className="max-w-[1320px] mx-auto px-4 sm:px-6 py-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-
-            {/* Logo / Title */}
-            <div>
-              <div className="flex items-center gap-2 mb-0.5">
-                <span className="text-xl">🍷</span>
-                <h1 className="text-2xl sm:text-3xl font-black text-cream font-serif">
-                  Drink<span className="text-amber">it</span>
-                </h1>
-                <span className="bg-amber text-base text-[9px] font-black uppercase px-2 py-0.5 rounded-full tracking-wide">Premium</span>
-              </div>
-              <p className="text-sm text-muted">Fine wines, craft beers & single malts — compare & discover</p>
-            </div>
-
-            {/* Right: Search + Wishlist + Compare */}
-            <div className="flex items-center gap-2 flex-wrap">
-              {/* Search */}
-              <div className="relative">
-                <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-muted" />
-                <input
-                  type="text"
-                  value={searchQuery}
-                  onChange={e => setSearchQuery(e.target.value)}
-                  placeholder="Search beverages..."
-                  className="pl-9 pr-8 py-2 bg-base border border-white/10 rounded-full text-sm text-cream placeholder:text-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-amber focus:border-amber transition-colors w-44 sm:w-52"
-                />
-                {searchQuery && (
-                  <button onClick={() => setSearchQuery("")} className="absolute right-3 top-1/2 -translate-y-1/2 text-muted hover:text-cream focus-visible:ring-2 focus-visible:ring-amber rounded">
-                    <X className="w-3 h-3" />
-                  </button>
-                )}
-              </div>
-
-              {/* Sort */}
-              <div className="relative hidden sm:block">
-                <select value={sortBy} onChange={e => setSortBy(e.target.value as typeof sortBy)}
-                  className="appearance-none pl-3 pr-7 py-2 bg-base border border-white/10 rounded-full text-sm font-semibold text-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-amber cursor-pointer transition-colors">
-                  <option value="relevance">Relevance</option>
-                  <option value="price-low">Price ↑</option>
-                  <option value="price-high">Price ↓</option>
-                  <option value="rating">Top Rated</option>
-                  <option value="discount">Best Deal</option>
-                </select>
-                <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-muted pointer-events-none" />
-              </div>
-
-              {/* Wishlist */}
-              <button onClick={() => setIsWishlistOpen(true)}
-                className="relative flex items-center gap-1.5 px-3 py-2 rounded-full border-2 border-amber/30 bg-amber/5 text-amber font-bold text-sm hover:bg-amber/10 transition-all focus-visible:ring-2 focus-visible:ring-amber">
-                <Heart className="w-3.5 h-3.5 fill-amber" />
-                <span className="hidden sm:inline">Wishlist</span>
-                {wishlistItems.length > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-amber text-base text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">{wishlistItems.length}</span>
-                )}
-              </button>
-
-              {/* Compare */}
-              <button onClick={() => setIsCompareModalOpen(true)}
-                className="relative flex items-center gap-1.5 px-3 py-2 rounded-full border-2 border-amber-glow/30 bg-amber-glow/5 text-amber-glow font-bold text-sm hover:bg-amber-glow/10 transition-all focus-visible:ring-2 focus-visible:ring-amber">
-                <Scale className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Compare</span>
-                {compareItems.length > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-amber-glow text-base text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">{compareItems.length}</span>
-                )}
-              </button>
-
-              {/* Mobile filter toggle */}
-              <button onClick={() => setShowMobileFilter(!showMobileFilter)}
-                className={`lg:hidden relative flex items-center gap-1.5 px-3 py-2 rounded-full border-2 font-bold text-sm transition-all focus-visible:ring-2 focus-visible:ring-amber ${showMobileFilter ? "bg-amber border-amber text-base" : "border-white/10 text-cream bg-surface"}`}>
-                <Filter className="w-3.5 h-3.5" />
-                <span>Filter</span>
-                {activeFilterCount > 0 && (
-                  <span className="absolute -top-1.5 -right-1.5 bg-amber text-base text-[9px] font-black w-4 h-4 rounded-full flex items-center justify-center">{activeFilterCount}</span>
-                )}
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
 
       {/* ─── Category Sticky Bar ──────────────────────────────────────────── */}
       <div className="bg-surface border-b border-white/5 sticky top-[80px] z-30">
@@ -411,13 +329,27 @@ function DrinkitContent() {
           <div className="flex-1 min-w-0">
             {/* Toolbar */}
             <div className="flex items-center justify-between mb-4">
-              <div>
-                <h2 className="text-base font-black text-cream">
-                  {activeCategorySlug === "all" ? "All Beverages" : drinkCategories.find(c => c.slug === activeCategorySlug)?.name}
-                </h2>
-                <p className="text-xs text-muted">
-                  Showing <span className="font-bold text-amber">{filteredProducts.length}</span> of {drinkitProducts.length} drinks
-                </p>
+              <div className="flex items-center gap-3 flex-wrap">
+                <div>
+                  <h2 className="text-base font-black text-cream">
+                    {activeCategorySlug === "all" ? "All Beverages" : drinkCategories.find(c => c.slug === activeCategorySlug)?.name}
+                  </h2>
+                  <p className="text-xs text-muted">
+                    Showing <span className="font-bold text-amber">{filteredProducts.length}</span> of {drinkitProducts.length} drinks
+                  </p>
+                </div>
+                {/* Sort — inline after heading */}
+                <div className="relative">
+                  <select value={sortBy} onChange={e => setSortBy(e.target.value as typeof sortBy)}
+                    className="appearance-none pl-3 pr-7 py-1.5 bg-surface border border-white/10 rounded-full text-xs font-semibold text-cream focus:outline-none focus-visible:ring-2 focus-visible:ring-amber cursor-pointer transition-colors hover:border-amber/40">
+                    <option value="relevance">Relevance</option>
+                    <option value="price-low">Price ↑</option>
+                    <option value="price-high">Price ↓</option>
+                    <option value="rating">Top Rated</option>
+                    <option value="discount">Best Deal</option>
+                  </select>
+                  <ChevronDown className="absolute right-2.5 top-1/2 -translate-y-1/2 w-3 h-3 text-muted pointer-events-none" />
+                </div>
               </div>
               {activeFilterCount > 0 && (
                 <button onClick={resetFilters} className="flex items-center gap-1 text-xs text-amber font-bold hover:underline focus-visible:ring-2 focus-visible:ring-amber rounded">

@@ -1,5 +1,6 @@
 import Hero from "./sections/Hero";
 import Category from "./sections/Category";
+import StatsMarquee from "./sections/StatsMarquee";
 import BudgetTiers from "./sections/BudgetTiers";
 import TrendingLineup from "./sections/TrendingLineup";
 import QuickCompare from "./sections/QuickCompare";
@@ -14,6 +15,9 @@ export default function Home() {
 
       {/* 2. Quick Category Icon Row (Single Malts, Scotch, Gin, Beer, Vodka, Rum, etc.) */}
       <Category />
+
+      {/* 2b. Animated Stats Marquee Strip */}
+      <StatsMarquee />
 
       {/* 3. Budget & Occasion Explorer (Under ₹1,000, Weekend Parties, Luxury Single Malts) */}
       <BudgetTiers />
